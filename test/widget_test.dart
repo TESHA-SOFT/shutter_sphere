@@ -7,6 +7,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shutter_sphere/main.dart';
+import 'package:shutter_sphere/src/common/routes/routes.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
