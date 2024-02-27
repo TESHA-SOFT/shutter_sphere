@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shutter_sphere/src/common/style/style_color.dart';
+import '../../widget/view_auth_widget.dart';
 
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
@@ -14,21 +15,23 @@ class _LogInState extends State<LogIn> {
   final _passwordController = TextEditingController();
   bool isobscureText = true;
 
+  CircleAvatar emailButton(String rout) {
+    return CircleAvatar(
+      radius: 20,
+      backgroundColor: AppColor.font1,
+      child: IconButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/home');
+        },
+        icon: SvgPicture.asset(rout),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          backgroundColor: AppColor.background,
-          leading: Padding(
-            padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-            child: IconButton(
-              onPressed: () => Navigator.pop(context, false),
-              icon: SvgPicture.asset(
-                'assets/icons/arrow.svg',
-                width: 40,
-              ),
-            ),
-          )),
+      appBar: AppBarWidget(),
       body: LayoutBuilder(
         builder: (context, constraints) => SingleChildScrollView(
           child: ConstrainedBox(
@@ -47,9 +50,6 @@ class _LogInState extends State<LogIn> {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      /*SizedBox(
-                        height: 10,
-                      ),*/
                       Spacer(),
                       Align(
                         alignment: Alignment.centerLeft,
@@ -65,19 +65,11 @@ class _LogInState extends State<LogIn> {
                       SizedBox(
                         height: 17,
                       ),
-                      TextFormField(
-                        cursorColor: AppColor.button1,
+                      TextFormEmail(
                         controller: _emailController,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Enter the Email',
-                          hintStyle: TextStyle(
-                            color: AppColor.font3,
-                            fontWeight: FontWeight.w300,
-                          ),
-                          filled: true,
-                          fillColor: AppColor.font1,
-                        ),
+                        text: 'Enter the Email',
+                        validator: (value) => ValidApp().validateEmail(value),
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
                       SizedBox(
                         height: 10,
@@ -94,7 +86,9 @@ class _LogInState extends State<LogIn> {
                             ),
                           ),
                           TextButton(
-                            onPressed: () => Navigator.pop(context, false),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/resetpas');
+                            },
                             child: Text(
                               'Forgot Password?',
                               style: TextStyle(
@@ -113,30 +107,12 @@ class _LogInState extends State<LogIn> {
                       SizedBox(
                         height: 10,
                       ),
-                      TextFormField(
-                        cursorColor: AppColor.button1,
-                        controller: _passwordController,
-                        obscureText: isobscureText,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Enter the Password',
-                          hintStyle: TextStyle(
-                            color: AppColor.font3,
-                            fontWeight: FontWeight.w300,
-                          ),
-                          filled: true,
-                          fillColor: AppColor.font1,
-                          suffixIcon: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                isobscureText = !isobscureText;
-                              });
-                            },
-                            icon: isobscureText
-                                ? SvgPicture.asset('assets/icons/eye_off.svg')
-                                : SvgPicture.asset('assets/icons/eye.svg'),
-                          ),
-                        ),
+                      PasswordTextForm(
+                        text: 'Enter the Password',
+                        passwordController: _passwordController,
+                        validator: (value) =>
+                            ValidApp().validatePassword(value),
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
                       Spacer(),
                       SizedBox(
@@ -146,22 +122,20 @@ class _LogInState extends State<LogIn> {
                         width: double.infinity,
                         height: 45,
                         child: ElevatedButton(
-                          onPressed: () => Navigator.pop(context, false),
-                          style: TextButton.styleFrom(
-                            backgroundColor: AppColor.button1,
-                            foregroundColor: AppColor.font1,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4),
+                            onPressed: () => Navigator.pop(context, false),
+                            style: TextButton.styleFrom(
+                              backgroundColor: AppColor.button1,
+                              foregroundColor: AppColor.font1,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4),
+                              ),
                             ),
-                          ),
-                          child: Text(
-                            'Log In',
-                            style: TextStyle(
-                              fontSize: 20,
-
-                            ),
-                          )
-                        ),
+                            child: Text(
+                              'Log In',
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
+                            )),
                       ),
                       Spacer(),
                       Row(
@@ -176,9 +150,11 @@ class _LogInState extends State<LogIn> {
                             ),
                           ),
                           TextButton(
-                            onPressed: () => Navigator.pop(context, false),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/emailsignup');
+                            },
                             child: Text(
-                              'Sign In!',
+                              'Sign Up!',
                               style: TextStyle(
                                 fontSize: 22,
                                 color: AppColor.button2,
@@ -209,30 +185,9 @@ class _LogInState extends State<LogIn> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          CircleAvatar(
-                            radius: 20,
-                            backgroundColor: AppColor.font1,
-                            child: IconButton(
-                              onPressed:  () => Navigator.pop(context, false),
-                              icon: SvgPicture.asset('assets/images/google.svg'),
-                            ),
-                          ),
-                          CircleAvatar(
-                            radius: 20,
-                            backgroundColor: AppColor.font1,
-                            child: IconButton(
-                              onPressed:  () => Navigator.pop(context, false),
-                              icon: SvgPicture.asset('assets/images/vk.svg'),
-                            ),
-                          ),
-                          CircleAvatar(
-                            radius: 20,
-                            backgroundColor: AppColor.font1,
-                            child: IconButton(
-                              onPressed:  () => Navigator.pop(context, false),
-                              icon: SvgPicture.asset('assets/images/yandex.svg'),
-                            ),
-                          ),
+                          emailButton('assets/images/google.svg'),
+                          emailButton('assets/images/vk.svg'),
+                          emailButton('assets/images/yandex.svg'),
                         ],
                       ),
                       Spacer(),
