@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shutter_sphere/src/feauter/auth/pages/log_in/log_in_page.dart';
 import 'package:shutter_sphere/src/feauter/home/pages/home_page.dart';
 import 'package:shutter_sphere/src/feauter/start/start_page.dart';
+import '../../feauter/auth/pages/view_auth_pages.dart';
 import '../style/style_view.dart';
 
 class MyApp extends StatelessWidget {
@@ -19,8 +19,12 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => StartPage(),
-        '/home': (context) => Home(),
+        '/home': (context) => HomePage(),
         '/login': (context) => LogIn(),
+        '/emailsignup': (context) => EmailSignUp(),
+        '/profilreg': (context) => ProfilePage(),
+        '/updatepas': (context) => UpdatePassword(),
+        '/resetpas': (context) => ResetPassword(),
       },
     );
   }
