@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shutter_sphere/src/common/style/style_view.dart';
+import 'package:shutter_sphere/src/feauter/widget/button_widget.dart';
 import '../../widget/view_auth_widget.dart';
 
 class ResetPassword extends StatefulWidget {
@@ -75,27 +76,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                     ),
                     Spacer(),
-                    SizedBox(
-                      width: double.infinity,
-                      height: 45,
-                      child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/updatepas');
-                          },
-                          style: TextButton.styleFrom(
-                            backgroundColor: AppColor.button1,
-                            foregroundColor: AppColor.font1,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                          ),
-                          child: Text(
-                            'Reset',
-                            style: TextStyle(
-                              fontSize: 20,
-                            ),
-                          )),
-                    ),
+                    ButtonWidget(text: 'Reset'),
                     Spacer(),
                   ],
                 ),

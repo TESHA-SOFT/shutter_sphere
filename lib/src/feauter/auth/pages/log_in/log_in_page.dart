@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shutter_sphere/src/common/style/style_color.dart';
+import 'package:shutter_sphere/src/feauter/widget/button_widget.dart';
 import '../../widget/view_auth_widget.dart';
 
 class LogIn extends StatefulWidget {
@@ -118,28 +119,10 @@ class _LogInState extends State<LogIn> {
                       SizedBox(
                         height: 10,
                       ),
-                      SizedBox(
-                        width: double.infinity,
-                        height: 45,
-                        child: ElevatedButton(
-                            onPressed: () => Navigator.pop(context, false),
-                            style: TextButton.styleFrom(
-                              backgroundColor: AppColor.button1,
-                              foregroundColor: AppColor.font1,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(4),
-                              ),
-                            ),
-                            child: Text(
-                              'Log In',
-                              style: TextStyle(
-                                fontSize: 20,
-                              ),
-                            )),
-                      ),
+                      ButtonWidget(text: 'Log In'),
                       Spacer(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      OverflowBar(
+                        overflowAlignment: OverflowBarAlignment.center,
                         children: [
                           Text(
                             'No account?',
