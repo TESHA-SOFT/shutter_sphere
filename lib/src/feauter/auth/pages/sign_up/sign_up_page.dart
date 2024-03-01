@@ -12,6 +12,7 @@ class EmailSignUp extends StatefulWidget {
 
 class _EmailSignUpState extends State<EmailSignUp> {
   final _emailController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -24,94 +25,104 @@ class _EmailSignUpState extends State<EmailSignUp> {
             child: IntrinsicHeight(
               child: Padding(
                 padding: EdgeInsets.all(20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Register Account',
-                        style: TextStyle(
-                          fontSize: 35,
-                          color: AppColor.font2,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Enter your email address for account registration',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: AppColor.font1,
-                          fontWeight: FontWeight.w300,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 40,
-                    ),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Email',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: AppColor.font1,
-                          fontWeight: FontWeight.w300,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    TextFormEmail(
-                      text: 'Enter the Email',
-                      controller: _emailController,
-                      validator: (value) => ValidApp().validateEmail(value),
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                    ),
-                    Spacer(),
-                    ButtonWidget(text: 'Sign Up'),
-                    Spacer(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Have an Account?',
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Register Account',
                           style: TextStyle(
-                            color: AppColor.font1,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w200,
+                            fontSize: 35,
+                            color: AppColor.font2,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/login');
-                          },
-                          child: Text(
-                            'Log In!',
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      const Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Enter your email address for account registration',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: AppColor.font1,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      const Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Email',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: AppColor.font1,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      TextFormEmail(
+                        text: 'Enter the Email',
+                        controller: _emailController,
+                        validator: (value) => ValidApp().validateEmail(value),
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                      ),
+                      const Spacer(),
+                      ButtonWidget(
+                        text: 'Sign Up',
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            Navigator.pushNamed(context, '/verifyemail');
+                          }
+                        },
+                      ),
+                      const Spacer(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            'Have an Account?',
                             style: TextStyle(
+                              color: AppColor.font1,
                               fontSize: 14,
-                              color: AppColor.button2,
                               fontWeight: FontWeight.w200,
                             ),
                           ),
-                          style: ButtonStyle(
-                            overlayColor:
-                                MaterialStatePropertyAll(AppColor.background),
-                          ),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                  ],
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/login');
+                            },
+                            child: Text(
+                              'Log In!',
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: AppColor.button2,
+                                fontWeight: FontWeight.w200,
+                              ),
+                            ),
+                            style: ButtonStyle(
+                              overlayColor:
+                                  MaterialStatePropertyAll(AppColor.background),
+                            ),
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

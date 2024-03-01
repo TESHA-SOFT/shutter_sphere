@@ -3,10 +3,8 @@ import '../../common/style/style_view.dart';
 
 class ButtonWidget extends StatelessWidget {
   final String text;
-  const ButtonWidget({
-    super.key, 
-    required this.text
-  });
+  final void Function()? onPressed;
+  const ButtonWidget({super.key, required this.text, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +12,7 @@ class ButtonWidget extends StatelessWidget {
       width: double.infinity,
       height: 45,
       child: ElevatedButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '/profilreg');
-          },
+          onPressed: onPressed,
           style: TextButton.styleFrom(
             backgroundColor: AppColor.button1,
             foregroundColor: AppColor.font1,

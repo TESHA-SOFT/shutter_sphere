@@ -11,6 +11,7 @@ class ResetPassword extends StatefulWidget {
 }
 
 class _ResetPasswordState extends State<ResetPassword> {
+  final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
 
   @override
@@ -24,61 +25,71 @@ class _ResetPasswordState extends State<ResetPassword> {
             child: IntrinsicHeight(
               child: Padding(
                 padding: EdgeInsets.all(20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Reset Password',
-                        style: TextStyle(
-                          fontSize: 35,
-                          color: AppColor.font2,
-                          fontWeight: FontWeight.w600,
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Reset Password',
+                          style: TextStyle(
+                            fontSize: 35,
+                            color: AppColor.font2,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Enter your email address to reset your password',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: AppColor.font1,
-                          fontWeight: FontWeight.w300,
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      const Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Enter your email address to reset your password',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: AppColor.font1,
+                            fontWeight: FontWeight.w300,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 40,
-                    ),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Email',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: AppColor.font1,
-                          fontWeight: FontWeight.w300,
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      const Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Email',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: AppColor.font1,
+                            fontWeight: FontWeight.w300,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    TextFormEmail(
-                      text: 'Enter the Email',
-                      controller: _emailController,
-                      validator: (value) => ValidApp().validateEmail(value),
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                    ),
-                    Spacer(),
-                    ButtonWidget(text: 'Reset'),
-                    Spacer(),
-                  ],
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      TextFormEmail(
+                        text: 'Enter the Email',
+                        controller: _emailController,
+                        validator: (value) => ValidApp().validateEmail(value),
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                      ),
+                      const Spacer(),
+                      ButtonWidget(
+                        text: 'Reset',
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            Navigator.pushNamed(context, '/verifyemail');
+                          }
+                        },
+                      ),
+                      const Spacer(),
+                    ],
+                  ),
                 ),
               ),
             ),

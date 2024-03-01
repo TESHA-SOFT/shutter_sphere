@@ -14,6 +14,7 @@ class LogIn extends StatefulWidget {
 class _LogInState extends State<LogIn> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
   bool isobscureText = true;
 
   CircleAvatar emailButton(String rout) {
@@ -40,141 +41,151 @@ class _LogInState extends State<LogIn> {
             child: IntrinsicHeight(
               child: Padding(
                 padding: EdgeInsets.all(20),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Welcome to Shutter Sphere',
-                        style: TextStyle(
-                          fontSize: 35,
-                          color: AppColor.font2,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      Spacer(),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Email',
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'Welcome to Shutter Sphere',
                           style: TextStyle(
-                            fontSize: 12,
-                            color: AppColor.font1,
-                            fontWeight: FontWeight.w300,
+                            fontSize: 35,
+                            color: AppColor.font2,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 17,
-                      ),
-                      TextFormEmail(
-                        controller: _emailController,
-                        text: 'Enter the Email',
-                        validator: (value) => ValidApp().validateEmail(value),
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Password',
+                        const Spacer(),
+                        const Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Email',
                             style: TextStyle(
                               fontSize: 12,
                               color: AppColor.font1,
                               fontWeight: FontWeight.w300,
                             ),
                           ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/resetpas');
-                            },
-                            child: Text(
-                              'Forgot Password?',
+                        ),
+                        const SizedBox(
+                          height: 17,
+                        ),
+                        TextFormEmail(
+                          controller: _emailController,
+                          text: 'Enter the Email',
+                          validator: (value) => ValidApp().validateEmail(value),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Password',
                               style: TextStyle(
                                 fontSize: 12,
-                                color: AppColor.button2,
+                                color: AppColor.font1,
                                 fontWeight: FontWeight.w300,
                               ),
                             ),
-                            style: ButtonStyle(
-                              overlayColor:
-                                  MaterialStatePropertyAll(AppColor.background),
-                            ),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      PasswordTextForm(
-                        text: 'Enter the Password',
-                        passwordController: _passwordController,
-                        validator: (value) =>
-                            ValidApp().validatePassword(value),
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                      ),
-                      Spacer(),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      ButtonWidget(text: 'Log In'),
-                      Spacer(),
-                      OverflowBar(
-                        overflowAlignment: OverflowBarAlignment.center,
-                        children: [
-                          Text(
-                            'No account?',
-                            style: TextStyle(
-                              color: AppColor.font2,
-                              fontSize: 22,
-                              fontWeight: FontWeight.w200,
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/emailsignup');
-                            },
-                            child: Text(
-                              'Sign Up!',
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/resetpas');
+                              },
+                              child: Text(
+                                'Forgot Password?',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: AppColor.button2,
+                                  fontWeight: FontWeight.w300,
+                                ),
+                              ),
+                              style: ButtonStyle(
+                                overlayColor: MaterialStatePropertyAll(
+                                    AppColor.background),
+                              ),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        PasswordTextForm(
+                          text: 'Enter the Password',
+                          passwordController: _passwordController,
+                          validator: (value) =>
+                              ValidApp().validatePassword(value),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                        ),
+                        const Spacer(),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        ButtonWidget(
+                          text: 'Log In',
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              Navigator.pushNamed(context, '/home');
+                            }
+                          },
+                        ),
+                        Spacer(),
+                        OverflowBar(
+                          overflowAlignment: OverflowBarAlignment.center,
+                          children: [
+                            Text(
+                              'No account?',
                               style: TextStyle(
+                                color: AppColor.font2,
                                 fontSize: 22,
-                                color: AppColor.button2,
                                 fontWeight: FontWeight.w200,
                               ),
                             ),
-                            style: ButtonStyle(
-                              overlayColor:
-                                  MaterialStatePropertyAll(AppColor.background),
-                            ),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        'or',
-                        style: TextStyle(
-                          color: AppColor.font2,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w200,
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/emailsignup');
+                              },
+                              child: Text(
+                                'Sign Up!',
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  color: AppColor.button2,
+                                  fontWeight: FontWeight.w200,
+                                ),
+                              ),
+                              style: ButtonStyle(
+                                overlayColor: MaterialStatePropertyAll(
+                                    AppColor.background),
+                              ),
+                            )
+                          ],
                         ),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          emailButton('assets/images/google.svg'),
-                          emailButton('assets/images/vk.svg'),
-                          emailButton('assets/images/yandex.svg'),
-                        ],
-                      ),
-                      Spacer(),
-                    ]),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Text(
+                          'or',
+                          style: TextStyle(
+                            color: AppColor.font2,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w200,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            emailButton('assets/images/google.svg'),
+                            emailButton('assets/images/vk.svg'),
+                            emailButton('assets/images/yandex.svg'),
+                          ],
+                        ),
+                        const Spacer(),
+                      ]),
+                ),
               ),
             ),
           ),
