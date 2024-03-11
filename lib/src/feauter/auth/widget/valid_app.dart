@@ -31,4 +31,11 @@ class ValidApp {
     }
     return null;
   }
+
+  String? validateNumber(String? phone) {
+    if (phone!.length > 14 && phone.length < 10) {
+      return 'Enter your phone number';
+    }
+    return null;
+  }
 }

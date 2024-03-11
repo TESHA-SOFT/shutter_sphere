@@ -58,7 +58,7 @@ class _LogInState extends State<LogIn> {
                         const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            'Email',
+                            'Number',
                             style: TextStyle(
                               fontSize: 12,
                               color: AppColor.font1,
@@ -71,8 +71,9 @@ class _LogInState extends State<LogIn> {
                         ),
                         TextFormEmail(
                           controller: _emailController,
-                          text: 'Enter the Email',
-                          validator: (value) => ValidApp().validateEmail(value),
+                          text: 'Enter the Number',
+                          validator: (value) =>
+                              ValidApp().validateNumber(value),
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                         ),
                         const SizedBox(
