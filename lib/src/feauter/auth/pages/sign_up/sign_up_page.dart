@@ -11,13 +11,13 @@ class EmailSignUp extends StatefulWidget {
 }
 
 class _EmailSignUpState extends State<EmailSignUp> {
-  final _emailController = TextEditingController();
+  final _numberController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWidget(),
+      appBar: const AppBarWidget(),
       body: LayoutBuilder(
         builder: (context, constraints) => SingleChildScrollView(
           child: ConstrainedBox(
@@ -47,7 +47,7 @@ class _EmailSignUpState extends State<EmailSignUp> {
                       const Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'Enter your email address for account registration',
+                          'Enter your number for account registration',
                           style: TextStyle(
                             fontSize: 14,
                             color: AppColor.font1,
@@ -61,7 +61,7 @@ class _EmailSignUpState extends State<EmailSignUp> {
                       const Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'Email',
+                          'Number',
                           style: TextStyle(
                             fontSize: 12,
                             color: AppColor.font1,
@@ -72,10 +72,10 @@ class _EmailSignUpState extends State<EmailSignUp> {
                       const SizedBox(
                         height: 15,
                       ),
-                      TextFormEmail(
-                        text: 'Enter the Email',
-                        controller: _emailController,
-                        validator: (value) => ValidApp().validateEmail(value),
+                      TextFormNumber(
+                        text: 'Enter the Number',
+                        controller: _numberController,
+                        validator: (value) => ValidApp().validateNumber(value),
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
                       const Spacer(),
@@ -83,7 +83,7 @@ class _EmailSignUpState extends State<EmailSignUp> {
                         text: 'Sign Up',
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            Navigator.pushNamed(context, '/verifyemail');
+                            Navigator.pushNamed(context, '/verifynumb');
                           }
                         },
                       ),

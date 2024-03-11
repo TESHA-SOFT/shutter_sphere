@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shutter_sphere/src/feauter/auth/widget/app_bar_widget.dart';
-import '../../../../common/style/style_view.dart';
+import '../../../common/style/style_view.dart';
 
 class VerifyEmail extends StatefulWidget {
   const VerifyEmail({super.key});
