@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "336428492855",
+    "project_id": "shutter-sphere-7a1be",
+    "storage_bucket": "shutter-sphere-7a1be.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:336428492855:android:d434ce64ff238284cf37b2",
+        "android_client_info": {
+          "package_name": "com.example.photo_center_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjuihrX_pn8zG5OMj0KBYnNamXddQ8l4E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
