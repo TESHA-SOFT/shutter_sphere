@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../common/style/style_view.dart';
 
 class StartPage extends StatelessWidget {
@@ -92,7 +93,8 @@ class StartPage extends StatelessWidget {
                         width: 260,
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, '/login');
+                            context.go('/login');
+                            //Navigator.pushNamed(context, '/login');
                           },
                           child: Text(
                             'log In',
@@ -114,7 +116,8 @@ class StartPage extends StatelessWidget {
                         width: 260,
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, '/home');
+                            context.go('/home');
+                            //Navigator.pushNamed(context, '/home');
                           },
                           child: Text(
                             'Start as a guest',

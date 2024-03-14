@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shutter_sphere/src/feauter/widget/button_widget.dart';
 import '../../../../common/style/style_view.dart';
 import '../../widget/view_auth_widget.dart';
@@ -17,7 +18,7 @@ class _EmailSignUpState extends State<EmailSignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarWidget(),
+      appBar: const AppBarWidget(route: '/login',),
       body: LayoutBuilder(
         builder: (context, constraints) => SingleChildScrollView(
           child: ConstrainedBox(
@@ -83,7 +84,8 @@ class _EmailSignUpState extends State<EmailSignUp> {
                         text: 'Sign Up',
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            Navigator.pushNamed(context, '/verifynumb');
+                            context.go('/verifynumb');
+                            //Navigator.pushNamed(context, '/verifynumb');
                           }
                         },
                       ),

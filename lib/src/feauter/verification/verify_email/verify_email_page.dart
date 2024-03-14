@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shutter_sphere/src/feauter/auth/widget/app_bar_widget.dart';
 import '../../../common/style/style_view.dart';
 
@@ -14,7 +15,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWidget(),
+      appBar: AppBarWidget(route: '/resetpas',),
       body: LayoutBuilder(
         builder: (context, constraints) => SingleChildScrollView(
           child: ConstrainedBox(
@@ -54,7 +55,9 @@ class _VerifyEmailState extends State<VerifyEmail> {
                     SizedBox(
                       width: (MediaQuery.of(context).size.width) / 1.3,
                       child: FloatingActionButton.extended(
-                        onPressed: () => Navigator.pop(context, false),
+                        onPressed: (){
+                          context.go('/login');
+                        }, //Navigator.pop(context, false),
                         label: Text(
                           'Resend the email',
                           style: TextStyle(
@@ -74,7 +77,10 @@ class _VerifyEmailState extends State<VerifyEmail> {
                       height: 20,
                     ),
                     TextButton(
-                      onPressed: () => Navigator.pop(context, false),
+                      onPressed: () {
+                        context.go('/login');
+                        //=> Navigator.pop(context, false),
+                      },
                       child: Text(
                         'Сancel',
                         style: TextStyle(

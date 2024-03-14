@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shutter_sphere/src/common/style/style_color.dart';
 import 'package:shutter_sphere/src/feauter/widget/button_widget.dart';
 import '../../widget/view_auth_widget.dart';
@@ -23,7 +24,8 @@ class _LogInState extends State<LogIn> {
       backgroundColor: AppColor.font1,
       child: IconButton(
         onPressed: () {
-          Navigator.pushNamed(context, '/home');
+          context.go('/home');
+          //Navigator.pushNamed(context, '/home');
         },
         icon: SvgPicture.asset(rout),
       ),
@@ -33,7 +35,7 @@ class _LogInState extends State<LogIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWidget(),
+      appBar: AppBarWidget(route: '/',),
       body: LayoutBuilder(
         builder: (context, constraints) => SingleChildScrollView(
           child: ConstrainedBox(
@@ -92,7 +94,8 @@ class _LogInState extends State<LogIn> {
                             ),
                             TextButton(
                               onPressed: () {
-                                Navigator.pushNamed(context, '/resetpas');
+                                context.go('/resetpas');
+                                //Navigator.pushNamed(context, '/resetpas');
                               },
                               child: Text(
                                 'Forgot Password?',
@@ -127,7 +130,8 @@ class _LogInState extends State<LogIn> {
                           text: 'Log In',
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              Navigator.pushNamed(context, '/home');
+                              context.go('/home');
+                              //Navigator.pushNamed(context, '/home');
                             }
                           },
                         ),
@@ -145,7 +149,8 @@ class _LogInState extends State<LogIn> {
                             ),
                             TextButton(
                               onPressed: () {
-                                Navigator.pushNamed(context, '/emailsignup');
+                                context.go('/emailsignup');
+                                //Navigator.pushNamed(context, '/emailsignup');
                               },
                               child: Text(
                                 'Sign Up!',

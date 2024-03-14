@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shutter_sphere/src/feauter/widget/button_widget.dart';
 import '../../../../common/style/style_view.dart';
 import '../../widget/view_auth_widget.dart';
@@ -17,7 +18,7 @@ class _UpdatePasswordState extends State<UpdatePassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWidget(),
+      appBar: AppBarWidget(route: '/verifyemail',),
       body: LayoutBuilder(
           builder: (context, constrains) => SingleChildScrollView(
                 child: ConstrainedBox(
@@ -90,7 +91,8 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                             text: 'Save update',
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                Navigator.pushNamed(context, '/login');
+                                context.go('/login');
+                                //Navigator.pushNamed(context, '/login');
                               }
                             },
                           ),

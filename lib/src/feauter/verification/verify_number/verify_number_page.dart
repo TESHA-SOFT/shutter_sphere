@@ -12,7 +12,7 @@ class _CodePageState extends State<CodePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWidget(),
+      appBar: AppBarWidget(route: '/',),
       body: LayoutBuilder(
         builder: (context, constrains) => SingleChildScrollView(
           child: ConstrainedBox(

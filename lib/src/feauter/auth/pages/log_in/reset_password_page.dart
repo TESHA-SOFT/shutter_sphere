@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shutter_sphere/src/common/style/style_view.dart';
 import 'package:shutter_sphere/src/feauter/widget/button_widget.dart';
 import '../../widget/view_auth_widget.dart';
@@ -17,7 +18,7 @@ class _ResetPasswordState extends State<ResetPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWidget(),
+      appBar: AppBarWidget(route: '/login',),
       body: LayoutBuilder(
         builder: (context, constraints) => SingleChildScrollView(
           child: ConstrainedBox(
@@ -83,7 +84,8 @@ class _ResetPasswordState extends State<ResetPassword> {
                         text: 'Reset',
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            Navigator.pushNamed(context, '/verifyemail');
+                            context.go('/verifyemail');
+                            //Navigator.pushNamed(context, '/verifyemail');
                           }
                         },
                       ),
