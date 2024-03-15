@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shutter_sphere/src/common/style/style_view.dart';
+import 'package:shutter_sphere/src/feauter/auth/widget/text_form_number.dart';
 import 'package:shutter_sphere/src/feauter/widget/button_widget.dart';
 import '../../widget/view_auth_widget.dart';
 
@@ -12,13 +13,14 @@ class ResetPassword extends StatefulWidget {
 }
 
 class _ResetPasswordState extends State<ResetPassword> {
+  String phone = '';
   final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
+  final _numberController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWidget(route: '/login',),
+      appBar: const AppBarWidget(route: '/login',),
       body: LayoutBuilder(
         builder: (context, constraints) => SingleChildScrollView(
           child: ConstrainedBox(
@@ -62,7 +64,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                       const Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'Email',
+                          'Number',
                           style: TextStyle(
                             fontSize: 12,
                             color: AppColor.font1,
@@ -73,10 +75,10 @@ class _ResetPasswordState extends State<ResetPassword> {
                       const SizedBox(
                         height: 15,
                       ),
-                      TextFormEmail(
-                        text: 'Enter the Email',
-                        controller: _emailController,
-                        validator: (value) => ValidApp().validateEmail(value),
+                      TextFormNumber(
+                        text: 'Enter the Number',
+                        controller: _numberController,
+                        validator: (value) => ValidApp().validateNumber(value),
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
                       const Spacer(),
@@ -84,8 +86,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                         text: 'Reset',
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            context.go('/verifyemail');
-                            //Navigator.pushNamed(context, '/verifyemail');
+                            context.goNamed('verifynumb', pathParameters: {'route': '/updatepas', 'phone': _numberController.text});
                           }
                         },
                       ),
