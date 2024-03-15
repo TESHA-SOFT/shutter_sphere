@@ -18,7 +18,7 @@ class _UpdatePasswordState extends State<UpdatePassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWidget(route: '/verifyemail',),
+      appBar: AppBarWidget(route: '/login',),
       body: LayoutBuilder(
           builder: (context, constrains) => SingleChildScrollView(
                 child: ConstrainedBox(

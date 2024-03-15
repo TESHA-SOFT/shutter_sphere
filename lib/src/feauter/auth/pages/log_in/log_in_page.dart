@@ -149,7 +149,7 @@ class _LogInState extends State<LogIn> {
                             ),
                             TextButton(
                               onPressed: () {
-                                context.go('/emailsignup');
+                                context.go('/signup');
                                 //Navigator.pushNamed(context, '/emailsignup');
                               },
                               child: Text(

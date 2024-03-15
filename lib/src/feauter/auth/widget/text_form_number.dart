@@ -8,11 +8,13 @@ class TextFormNumber extends StatelessWidget {
   final String text;
   final String? Function(String?)? validator;
   final AutovalidateMode? autovalidateMode;
-  const TextFormNumber({
+  String? phone;
+  TextFormNumber({
     super.key, this.controller,
     required this.text,
     this.validator,
-    this.autovalidateMode
+    this.autovalidateMode,
+    this.phone,
   });
 
   @override
