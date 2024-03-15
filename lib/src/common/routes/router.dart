@@ -1,10 +1,8 @@
 import 'package:go_router/go_router.dart';
-
 import '../../feauter/auth/pages/view_auth_pages.dart';
 import '../../feauter/home/pages/home_page.dart';
 import '../../feauter/start/start_page.dart';
-import '../../feauter/verification/verify_email/verify_email_page.dart';
-import '../../feauter/verification/verify_number/verify_number_page.dart';
+import '../../feauter/verification/verify_number_page.dart';
 
 class AppRouter{
   late final router = GoRouter(
@@ -23,8 +21,8 @@ class AppRouter{
         builder: (context, state) => const LogIn(),
       ),
       GoRoute(
-        path: '/emailsignup',
-        builder: (context, state) => const EmailSignUp(),
+        path: '/signup',
+        builder: (context, state) => const SignUp(),
       ),
       GoRoute(
         path: '/profilreg',
@@ -39,12 +37,13 @@ class AppRouter{
         builder: (context, state) => const ResetPassword(),
       ),
       GoRoute(
-        path: '/verifyemail',
-        builder: (context, state) => const VerifyEmail(),
-      ),
-      GoRoute(
-        path: '/verifynumb',
-        builder: (context, state) => const CodePage(),
+        path: '/verifynumb/:route/:phone/:verificationId',
+        name: 'verifynumb',
+        builder: (context, state) => CodePage(
+          route: state.pathParameters['route'],
+          phone: state.pathParameters['phone'],
+          verificationId: state.pathParameters['verificationId'],
+        ),
       ),
     ],
   );
