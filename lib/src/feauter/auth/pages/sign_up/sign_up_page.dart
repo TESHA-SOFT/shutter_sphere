@@ -1,17 +1,20 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shutter_sphere/src/feauter/widget/button_widget.dart';
 import '../../../../common/style/style_view.dart';
 import '../../widget/view_auth_widget.dart';
 
-class EmailSignUp extends StatefulWidget {
-  const EmailSignUp({super.key});
+class SignUp extends StatefulWidget {
+  const SignUp({super.key});
 
   @override
-  State<EmailSignUp> createState() => _EmailSignUpState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _EmailSignUpState extends State<EmailSignUp> {
+class _SignUpState extends State<SignUp> {
+  String phone = '';
   final _numberController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
@@ -82,11 +85,23 @@ class _EmailSignUpState extends State<EmailSignUp> {
                       const Spacer(),
                       ButtonWidget(
                         text: 'Sign Up',
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            context.go('/verifynumb');
-                            //Navigator.pushNamed(context, '/verifynumb');
-                          }
+                        onPressed: () async{
+                          await FirebaseAuth.instance.verifyPhoneNumber(
+                              verificationCompleted: (PhoneAuthCredential phoneAuthCredential) { },
+                              verificationFailed: (FirebaseAuthException error) { },
+                              codeSent: (String verificationId, int? forceResendingToken) {
+                                context.goNamed('verifynumb', pathParameters: {
+                                  'route': '/profilreg',
+                                  'phone': _numberController.text,
+                                  'verifif': verificationId,
+                                });
+                              },
+                              codeAutoRetrievalTimeout: (String verificationId) { },
+                            phoneNumber: _numberController.text.toString(),
+                          );
+                          /*if (_formKey.currentState!.validate()) {
+                            context.goNamed('verifynumb', pathParameters: {'route': '/profilreg', 'phone': _numberController.text});
+                          }*/
                         },
                       ),
                       const Spacer(),
@@ -103,7 +118,7 @@ class _EmailSignUpState extends State<EmailSignUp> {
                           ),
                           TextButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, '/login');
+                              context.go('/login');
                             },
                             child: Text(
                               'Log In!',
